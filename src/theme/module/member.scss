@@ -1,0 +1,26 @@
+.member {
+    ion-item-divider {
+        --color: var(--ion-color-secondary);
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    h2 {
+        margin: 0;
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+        color: var(--ion-color-dark);
+    }
+
+    fa-icon {
+        color: var(--ion-color-secondary);
+    }
+
+    .teach {
+        p {
+            margin: 0;
+            color: var(--ion-color-step-600, #666);
+        }
+    }
+}
+

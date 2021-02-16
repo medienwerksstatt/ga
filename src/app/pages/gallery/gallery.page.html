@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Fotos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-vertical">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="gallery" *ngIf="galleries">
+
+        <ion-item detail="true"
+                  [disabled]="isOffline"
+                  *ngFor="let gallery of galleries"
+                  [routerLink]="['/album', gallery.id]">
+
+            <ion-avatar slot="start">
+                <ion-img *ngIf="gallery.preview && !isOffline" [src]="environment.baseUrl + gallery.path + gallery.preview.filename"></ion-img>
+                <img *ngIf="gallery.preview && isOffline" src="/assets/img/placeholder.png">
+            </ion-avatar>
+            <ion-label>{{gallery.title}}</ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="!galleries">
+        <ion-item *ngFor="let gallery of loadingGalleries" class="sekeleton">
+            <ion-avatar slot="start">
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-avatar>
+            <ion-label>
+                <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

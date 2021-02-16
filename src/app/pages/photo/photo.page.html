@@ -1,0 +1,11 @@
+<ion-content fullscreen color="secondary">
+    <ion-icon routerDirection="back" routerLink="/album/{{gallery?.id}}" class="back" name="close" color="primary"></ion-icon>
+
+    <ion-slides *ngIf="gallery" pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let image of gallery.images">
+            <img src="{{environment.baseUrl + gallery.path + image.filename}}">
+        </ion-slide>
+    </ion-slides>
+
+    <ion-skeleton-text *ngIf="!gallery" class="skeleton-image" animated></ion-skeleton-text>
+</ion-content>

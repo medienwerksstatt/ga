@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{category?.name}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list class="article-list buttons-list" lines="none" *ngIf="buttons">
+        <ion-item detail="true" color="secondary" [routerLink]="['/article', button.id]" *ngFor="let button of buttons">
+            <ion-label>{{button.title.rendered}}</ion-label>
+        </ion-item>
+    </ion-list>
+
+    <div class="article-list" *ngIf="articles">
+        <ion-card *ngFor="let article of articles" class="article">
+            <ion-img *ngIf="article.featured_media && !isOffline" [src]="article._embedded['wp:featuredmedia'][0]?.media_details?.sizes['medium_large']?.source_url"></ion-img>
+            <img *ngIf="article.featured_media && isOffline" src="/assets/img/placeholder.png">
+            <ion-card-content>
+                <h2>{{article.title.rendered}}</h2>
+                <div [innerHTML]="article.excerpt.rendered | stripTags"></div>
+
+                <p><a [routerLink]="['/article', article.id]">Weiterlesen &hellip;</a></p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div class="article-list" *ngIf="!articles">
+        <ion-card *ngFor="let article of loadingArticles" class="article">
+            <ion-skeleton-text animated style="height:225px;margin:0;border-radius: 0"></ion-skeleton-text>
+            <ion-card-content>
+                <h2><ion-skeleton-text animated></ion-skeleton-text></h2>
+                <div><ion-skeleton-text animated></ion-skeleton-text></div>
+                <div><ion-skeleton-text animated></ion-skeleton-text></div>
+                <div><ion-skeleton-text animated></ion-skeleton-text></div>
+                <div><ion-skeleton-text animated></ion-skeleton-text></div>
+                <div><ion-skeleton-text animated></ion-skeleton-text></div>
+
+                <p><ion-skeleton-text animated></ion-skeleton-text></p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

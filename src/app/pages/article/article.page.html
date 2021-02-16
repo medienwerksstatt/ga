@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{article?.title.rendered}}
+            <ion-skeleton-text animated *ngIf="!article"></ion-skeleton-text>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <div class="article detail" *ngIf="article">
+        <ion-img *ngIf="article.featured_media && !isOffline" [src]="article._embedded['wp:featuredmedia'][0]?.media_details?.sizes['medium_large']?.source_url"></ion-img>
+        <img *ngIf="article.featured_media && isOffline" src="/assets/img/placeholder.png">
+
+        <h2>{{article.title.rendered}}</h2>
+
+        <div appWordpressContent [innerHTML]="article.content.rendered"></div>
+    </div>
+
+    <div *ngIf="!article">
+        <ion-skeleton-text animated style="height:100px;margin:0;border-radius: 0"></ion-skeleton-text>
+        <ion-card-content>
+            <h2><ion-skeleton-text animated></ion-skeleton-text></h2>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+            <div><ion-skeleton-text animated></ion-skeleton-text></div>
+        </ion-card-content>
+    </div>
+</ion-content>

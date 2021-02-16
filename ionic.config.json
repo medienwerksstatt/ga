@@ -1,0 +1,7 @@
+{
+  "name": "ionic-aachthurland",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

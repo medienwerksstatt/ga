@@ -1,0 +1,17 @@
+:host {
+    ion-img {
+        height: 225px;
+        object-fit: cover;
+    }
+
+    .buttons-list {
+        margin: 1.5rem 1rem;
+        --box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+
+        ion-item {
+            --border-radius: 8px;
+            font-weight: bold;
+            margin: 0.5em 0;
+        }
+    }
+}

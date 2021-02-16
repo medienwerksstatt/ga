@@ -1,0 +1,42 @@
+:host {
+    .back {
+        cursor: pointer;
+        position: absolute;
+        right: 0.5rem;
+        top: env(safe-area-inset-top, 0.5rem);
+        font-size: 2.5rem;
+        z-index: 10;
+        outline: none;
+    }
+
+    .skeleton-image {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    ion-slides {
+        height: 100%;
+
+        &.swiper-container-initialized {
+            ion-slide {
+                img {
+                    opacity: 1;
+                }
+            }
+        }
+
+        ion-slide {
+            img {
+                transition: opacity 0.3s;
+                opacity: 0;
+            }
+        }
+    }
+
+    @media (min-width: 480px) {
+        ion-slide {
+            padding: 1rem;
+        }
+    }
+}

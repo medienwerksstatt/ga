@@ -1,0 +1,64 @@
+<ion-menu type="overlay" [contentId]="contentId" (ionDidClose)="reset()" >
+    <ion-content>
+        <div class="logo">
+            <img with="1024" height="271" src="/assets/img/logo.svg" (click)="reset()">
+        </div>
+
+        <ion-list *ngIf="!activeSubmenu">
+            <div *ngFor="let p of appPages">
+                <ion-menu-toggle *ngIf="!p.submenu">
+                    <ion-item *ngIf="!p.external" detail="true" [routerDirection]="'root'" [routerLink]="p.url">
+                        <ng-template *ngTemplateOutlet="menuItem; context: {$implicit: p}"></ng-template>
+                    </ion-item>
+                    <ion-item *ngIf="p.external" detail="true" (click)="www(p.url)" button="true" [disabled]="isOffline">
+                        <ng-template *ngTemplateOutlet="menuItem; context: {$implicit: p}"></ng-template>
+                    </ion-item>
+                </ion-menu-toggle>
+
+                <ion-item *ngIf="p.submenu" detail="true" (click)="activate(p.submenu)" button="true">
+                    <ng-template *ngTemplateOutlet="menuItem; context: {$implicit: p}"></ng-template>
+                </ion-item>
+            </div>
+        </ion-list>
+
+        <div *ngFor="let s of subPages">
+            <ion-list *ngIf="activeSubmenu && activeSubmenu === s.id">
+                <ion-menu-toggle *ngFor="let p of s.pages">
+                    <ion-item detail="true" [routerDirection]="'root'" [routerLink]="p.url" (click)="activate('')">
+                        <ng-template *ngTemplateOutlet="menuItem; context: {$implicit: p}"></ng-template>
+                    </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+        </div>
+
+        <ion-text class="ion-text-center">
+            <p class="social">
+                <ion-menu-toggle>
+                    <ion-button fill="clear" color="dark" href="tel:{{environment.phoneNumber}}">
+                        <fa-icon icon="phone-square-alt" size="lg"></fa-icon>
+                    </ion-button>
+                    <ion-button fill="clear" color="dark" href="{{environment.whatsAppUrl}}" [disabled]="isOffline">
+                        <fa-icon [icon]="['fab', 'whatsapp-square']" size="lg"></fa-icon>
+                    </ion-button>
+                    <ion-button fill="clear" color="dark" href="mailto:{{environment.email}}">
+                        <fa-icon icon="envelope" size="lg"></fa-icon>
+                    </ion-button>
+                </ion-menu-toggle>
+            </p>
+            <p class="legal">
+                <ion-menu-toggle>
+                    <ion-button fill="clear" color="dark" class="ion-no-padding" (click)="www(environment.disclaimerUrl)" [disabled]="isOffline">Impressum</ion-button>
+                    <span> | </span>
+                    <ion-button fill="clear" color="dark" class="ion-no-padding" (click)="www(environment.privacyUrl)" [disabled]="isOffline">Datenschutz</ion-button>
+                </ion-menu-toggle>
+            </p>
+        </ion-text>
+
+        <ng-template #menuItem let-p>
+            <fa-icon slot="start" [icon]="p.icon"></fa-icon>
+            <ion-label>
+                {{p.title}}
+            </ion-label>
+        </ng-template>
+    </ion-content>
+</ion-menu>

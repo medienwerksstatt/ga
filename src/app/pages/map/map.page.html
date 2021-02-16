@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/member/{{teach}}"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Karte</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <agm-map [fitBounds]="true" [maxZoom]="18" *ngIf="members" [styles]="mapStyles">
+        <agm-marker *ngFor="let member of members"
+                    [agmFitBounds]="true"
+                    [latitude]="+member.latitude"
+                    [longitude]="+member.longitude"
+                    (markerClick)="navigate(member)"></agm-marker>
+    </agm-map>
+</ion-content>

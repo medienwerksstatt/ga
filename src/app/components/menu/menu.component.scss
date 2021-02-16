@@ -1,0 +1,49 @@
+:host {
+    --ion-background-color: var(--ion-color-tertiary);
+
+    .legal {
+        ion-button {
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        span {
+            vertical-align: middle;
+        }
+    }
+
+    .logo {
+        padding: calc(env(safe-area-inset-top, 0) + 2rem) 1rem 2rem 1rem;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    ion-list {
+        > div:last-child {
+            ion-item {
+                --border-width: 0 !important;
+            }
+        }
+
+        ion-item {
+            --border-width: 0 0 1px !important;
+        }
+
+        fa-icon {
+            display: block;
+            min-width: 2rem;
+            color: var(--ion-color-secondary)
+        }
+
+        ion-label {
+            --color: var(--ion-color-dark);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: smaller;
+            padding: 0.75rem 0;
+        }
+    }
+}
